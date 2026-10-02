@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rwonom Library - Pro Documentation</title>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-hover: #059669;
+            --accent-blue: #38bdf8;
+            --bg-dark: #090d16;
+            --bg-card: #111827;
+            --bg-code: #030712;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1f2937;
+            --border-glow: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 60px;
+        }
+
+        /* Top Bar for Owner */
+        .top-bar {
+            background: #030712;
+            border-bottom: 1px solid var(--border);
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .visitor-counter {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .visitor-counter span {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .owner-btn {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .owner-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Pro Header */
+        header {
+            background: linear-gradient(135deg, #022c22 0%, #090d16 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 10px 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        header h1 span {
+            color: var(--primary);
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: border-color 0.3s ease;
+        }
+
+        section:hover {
+            border-color: var(--border-glow);
+        }
+
+        section.featured {
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            background: linear-gradient(145deg, #111827 0%, #062018 100%);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        p.section-desc {
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+        }
+
+        /* Code Box */
+        .code-box {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            position: relative;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .copy-btn.copied {
+            background: #059669;
+        }
+
+        pre {
+            padding: 20px;
+            overflow-x: auto;
+            text-align: left;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        /* Modal Overlay for Owner Panel */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            text-align: center;
+        }
+
+        .modal h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            outline: none;
+            text-align: center;
+        }
+
+        .modal input:focus {
+            border-color: var(--primary);
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-start {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-start:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-close {
+            background: #374151;
+            color: #d1d5db;
+        }
+
+        .btn-close:hover {
+            background: #4b5563;
+        }
+
+        /* Owner Control Dashboard inside Modal or Section */
+        .owner-dashboard {
+            display: none;
+            text-align: left;
+        }
+
+        .owner-dashboard textarea {
+            width: 100%;
+            height: 120px;
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: #a5d6ff;
+            font-family: 'Fira Code', monospace;
+            padding: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            resize: vertical;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 3000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 60px;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar with Visitor Count & Owner Button -->
+    <div class="top-bar">
+        <div class="visitor-counter">
+            <i class="fa-solid fa-users"></i> Visitors: <span id="visitorCount">1,428</span>
+        </div>
+        <button class="owner-btn" onclick="openOwnerModal()">
+            <i class="fa-solid fa-lock"></i> Owner Panel
+        </button>
+    </div>
+
+    <!-- Pro Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"><i class="fa-solid fa-code"></i></div>
+            <h1>Rwonom <span>Library</span></h1>
+        </div>
+        <p>⚡ Professional Roblox UI Library & Modular Documentation ⚡</p>
+    </header>
+
+    <div class="container" id="systemsContainer">
+
+        <!-- Loadstring (Featured Pro Section) -->
+        <section class="featured" id="sec-loadstring">
+            <h2>🔗 1. Core Loadstring 🚀</h2>
+            <p class="section-desc">Paste this code at the very top of your script to load and initialize the library.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>loadstring.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="loadstring">local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/mmjjdok-lang/Rwonom-Hub-/refs/heads/main/Rwonom.%20Lua"))()</code></pre>
+            </div>
+        </section>
+
+        <!-- 1. Splash Screen -->
+        <section id="sec-splash">
+            <h2>⏳ 2. Splash Screen 🎬</h2>
+            <p class="section-desc">Independent splash screen that awaits completion before building the window.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>splash.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="splash">local splash = Library.Splash({
+    Text = "Your Logo Name", 
+    Font = "Bangers", 
+    Color = "Cyan",
+    BackgroundColor = "Dark", 
+    Size = 200, 
+    TextSize = 40,
+})
+splash:Wait()</code></pre>
+            </div>
+        </section>
+
+        <!-- 2. Window & Tags -->
+        <section id="sec-window">
+            <h2>🪟 3. Window & Tags 🏷️</h2>
+            <p class="section-desc">Create the core script window with custom themes and version tags.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>window.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="window">local Window = Library.CreateWindow({
+    Title = "Pro Interface", 
+    Icon = "home", 
+    Theme = "Green",
+    ToggleKey = Enum.KeyCode.RightShift,
+})
+Window:Tag({ Title = "v2.0", Color = "Blue" })</code></pre>
+            </div>
+        </section>
+
+        <!-- 3. Sections & Tabs -->
+        <section id="sec-tabs">
+            <h2>📁 4. Sections & Tabs 📑</h2>
+            <p class="section-desc">Organize elements neatly using inner tabs and sections.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>tabs.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="tabs">Window:Section("Main Section")
+local Main = Window:CreateTab("Home", "home")
+Main:CreateSection("Core Elements")</code></pre>
+            </div>
+        </section>
+
+        <!-- 4. Buttons -->
+        <section id="sec-button">
+            <h2>🖱️ 5. Buttons ⚡</h2>
+            <p class="section-desc">Add interactive buttons with automatic notifications.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>button.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="button">Main:CreateButton("Button Name", "Description here", function() 
+    Library.Notify("Success", "Button Clicked!", nil, 3, "success") 
+end)</code></pre>
+            </div>
+        </section>
+
+        <!-- 5. Toggles -->
+        <section id="sec-toggles">
+            <h2>🎚️ 6. Toggles & Checkboxes ☑️</h2>
+            <p class="section-desc">Standard toggle switches and custom checkbox elements.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>toggles.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="toggles">Main:CreateToggle({ Name = "Enable Feature", Default = false, Flag = "enabled", Callback = print })
+Main:CreateToggle({ Name = "Checkbox Style", Type = "Checkbox", Callback = print })</code></pre>
+            </div>
+        </section>
+
+        <!-- 6. Sliders -->
+        <section id="sec-slider">
+            <h2>🎛️ 7. Sliders 📊</h2>
+            <p class="section-desc">Control numeric values and speeds smoothly.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>slider.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="slider">Main:CreateSlider("WalkSpeed", 0, 100, 16, 1, print)</code></pre>
+            </div>
+        </section>
+
+        <!-- 7. Dropdowns -->
+        <section id="sec-dropdowns">
+            <h2>📋 8. Dropdowns 🗂️</h2>
+            <p class="section-desc">Single and multi-selection dropdown lists.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>dropdowns.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="dropdowns">Main:CreateDropdown("Select Option", { "A", "B", "C" }, print)
+Main:CreateMultiDropdown("Multi Select", { "X", "Y", "Z" }, print, { "X" })</code></pre>
+            </div>
+        </section>
+
+        <!-- 8. Keybind -->
+        <section id="sec-keybind">
+            <h2>⌨️ 9. Keybinds 🎮</h2>
+            <p class="section-desc">Bind custom actions to keyboard keys.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>keybind.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="keybind">Main:CreateKeybind("Bind Key", Enum.KeyCode.F, function() 
+    print("Key F Pressed") 
+end)</code></pre>
+            </div>
+        </section>
+
+        <!-- 9. Notes, Labels & Paragraphs -->
+        <section id="sec-texts">
+            <h2>📝 10. Notes, Labels & Paragraphs 📌</h2>
+            <p class="section-desc">Display colored notes, text labels, and informative paragraphs.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>texts.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="texts">Main:CreateNote("Blue Notice Box", "Blue")
+Main:CreateNote("Dark Notice Box", "Dark")
+Main:CreateLabel("Simple Text Label")
+Main:CreateParagraph("Title Header", "Long explanatory text goes here", "info")</code></pre>
+            </div>
+        </section>
+
+        <!-- 10. Progress & Code -->
+        <section id="sec-progress">
+            <h2>📈 11. Progress Bars & Code Snippets 💻</h2>
+            <p class="section-desc">Visual progress indicators and inline code preview blocks.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>progress_code.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="progress">Main:CreateProgress("Loading Progress", 0, 100, 40)
+Main:CreateCode("Example Snippet", "print('hello world')")</code></pre>
+            </div>
+        </section>
+
+        <!-- 11. Dialogs -->
+        <section id="sec-dialog">
+            <h2>💬 12. Dialog Prompts ⚠️</h2>
+            <p class="section-desc">Popup confirmation dialog boxes for users.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>dialog.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="dialog">Window:Dialog({
+    Title = "Confirmation Alert", 
+    Content = "Do you want to proceed?", 
+    Icon = "info",
+    Buttons = {
+        { Title = "Yes", Variant = "Primary", Callback = function() end },
+        { Title = "No", Variant = "Secondary" },
+    },
+})</code></pre>
+            </div>
+        </section>
+
+        <!-- 12. Config Management -->
+        <section id="sec-config">
+            <h2>💾 13. Config Management ⚙️</h2>
+            <p class="section-desc">Automatically save and load element configurations using flags.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>config.lua</span>
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy Code</button>
+                </div>
+                <pre><code class="editable-code" data-key="config">Window:SaveConfig("default")   -- Saves all elements with flags
+Window:LoadConfig("default")</code></pre>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Owner Password Modal -->
+    <div class="modal-overlay" id="ownerModal">
+        <div class="modal">
+            <div id="loginView">
+                <h3>🔐 Owner Authentication</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Enter your secure password to access code modification controls.</p>
+                <input type="password" id="ownerPassword" placeholder="Enter secure password...">
+                <div class="modal-btns">
+                    <button class="modal-btn btn-start" onclick="verifyOwner()">Start 🚀</button>
+                    <button class="modal-btn btn-close" onclick="closeOwnerModal()">Cancel</button>
+                </div>
+            </div>
+
+            <div id="dashboardView" class="owner-dashboard">
+                <h3>⚙️ Live System Editor (Owner Pro)</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px;">Select a system key and update its code instantly:</p>
+                
+                <select id="systemSelector" onchange="loadSystemCode()" style="width:100%; padding:10px; background:var(--bg-code); border:1px solid var(--border); color:white; border-radius:8px; margin-bottom:10px; outline:none;">
+                    <option value="loadstring">1. Core Loadstring</option>
+                    <option value="splash">2. Splash Screen</option>
+                    <option value="window">3. Window & Tags</option>
+                    <option value="tabs">4. Sections & Tabs</option>
+                    <option value="button">5. Buttons</option>
+                    <option value="toggles">6. Toggles & Checkboxes</option>
+                    <option value="slider">7. Sliders</option>
+                    <option value="dropdowns">8. Dropdowns</option>
+                    <option value="keybind">9. Keybinds</option>
+                    <option value="texts">10. Notes, Labels & Paragraphs</option>
+                    <option value="progress">11. Progress & Code</option>
+                    <option value="dialog">12. Dialog Prompts</option>
+                    <option value="config">13. Config Management</option>
+                </select>
+
+                <textarea id="systemCodeEditor"></textarea>
+
+                <div class="modal-btns">
+                    <button class="modal-btn btn-start" onclick="saveSystemCode()">Update System 💾</button>
+                    <button class="modal-btn btn-close" onclick="closeOwnerModal()">Close ❌</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Code copied successfully! ✓</div>
+
+    <footer>
+        <p>All rights reserved &copy; 2026 - Rwonom Library Pro ⚡</p>
+    </footer>
+
+    <script>
+        // Store systems codes dynamically
+        const systemCodes = {
+            loadstring: 'local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/mmjjdok-lang/Rwonom-Hub-/refs/heads/main/Rwonom.%20Lua"))()',
+            splash: 'local splash = Library.Splash({\n    Text = "Your Logo Name", \n    Font = "Bangers", \n    Color = "Cyan",\n    BackgroundColor = "Dark", \n    Size = 200, \n    TextSize = 40,\n})\nsplash:Wait()',
+            window: 'local Window = Library.CreateWindow({\n    Title = "Pro Interface", \n    Icon = "home", \n    Theme = "Green",\n    ToggleKey = Enum.KeyCode.RightShift,\n})\nWindow:Tag({ Title = "v2.0", Color = "Blue" })',
+            tabs: 'Window:Section("Main Section")\nlocal Main = Window:CreateTab("Home", "home")\nMain:CreateSection("Core Elements")',
+            button: 'Main:CreateButton("Button Name", "Description here", function() \n    Library.Notify("Success", "Button Clicked!", nil, 3, "success") \nend)',
+            toggles: 'Main:CreateToggle({ Name = "Enable Feature", Default = false, Flag = "enabled", Callback = print })\nMain:CreateToggle({ Name = "Checkbox Style", Type = "Checkbox", Callback = print })',
+            slider: 'Main:CreateSlider("WalkSpeed", 0, 100, 16, 1, print)',
+            dropdowns: 'Main:CreateDropdown("Select Option", { "A", "B", "C" }, print)\nMain:CreateMultiDropdown("Multi Select", { "X", "Y", "Z" }, print, { "X" })',
+            keybind: 'Main:CreateKeybind("Bind Key", Enum.KeyCode.F, function() \n    print("Key F Pressed") \nend)',
+            texts: 'Main:CreateNote("Blue Notice Box", "Blue")\nMain:CreateNote("Dark Notice Box", "Dark")\nMain:CreateLabel("Simple Text Label")\nMain:CreateParagraph("Title Header", "Long explanatory text goes here", "info")',
+            progress: 'Main:CreateProgress("Loading Progress", 0, 100, 40)\nMain:CreateCode("Example Snippet", "print(\'hello world\')")',
+            dialog: 'Window:Dialog({\n    Title = "Confirmation Alert", \n    Content = "Do you want to proceed?", \n    Icon = "info",\n    Buttons = {\n        { Title = "Yes", Variant = "Primary", Callback = function() end },\n        { Title = "No", Variant = "Secondary" },\n    },\n})',
+            config: 'Window:SaveConfig("default")   -- Saves all elements with flags\nWindow:LoadConfig("default")'
+        };
+
+        function openOwnerModal() {
+            document.getElementById('ownerModal').style.display = 'flex';
+            document.getElementById('loginView').style.display = 'block';
+            document.getElementById('dashboardView').style.display = 'none';
+            document.getElementById('ownerPassword').value = '';
+        }
+
+        function closeOwnerModal() {
+            document.getElementById('ownerModal').style.display = 'none';
+        }
+
+        function verifyOwner() {
+            const pass = document.getElementById('ownerPassword').value;
+            if (pass === "aodm1039@#soner") {
+                document.getElementById('loginView').style.display = 'none';
+                document.getElementById('dashboardView').style.display = 'block';
+                loadSystemCode();
+            } else {
+                alert("❌ Incorrect Password!");
+            }
+        }
+
+        function loadSystemCode() {
+            const key = document.getElementById('systemSelector').value;
+            document.getElementById('systemCodeEditor').value = systemCodes[key];
+        }
+
+        function saveSystemCode() {
+            const key = document.getElementById('systemSelector').value;
+            const newCode = document.getElementById('systemCodeEditor').value;
+            systemCodes[key] = newCode;
+
+            // Update DOM code block
+            const codeEl = document.querySelector(`code[data-key="${key}"]`);
+            if (codeEl) {
+                codeEl.textContent = newCode;
+            }
+
+            showToast("System updated successfully! 🚀");
+            closeOwnerModal();
+        }
+
+        function playClickSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+                
+                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.08);
+            } catch (e) {}
+        }
+
+        function copyCode(button) {
+            playClickSound();
+            const codeBox = button.closest('.code-box');
+            const codeText = codeBox.querySelector('code').innerText;
+
+            navigator.clipboard.writeText(codeText).then(() => {
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                button.classList.add('copied');
+
+                showToast("Code copied successfully! ✓");
+
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy code');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
